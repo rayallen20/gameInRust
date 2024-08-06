@@ -1,0 +1,6 @@
+[package]
+name = "tree_house_guest_list_vector"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
