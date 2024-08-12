@@ -7,6 +7,12 @@ pub mod player;
 pub use player::Player;
 
 pub mod obstacle;
-mod bgm;
-
 pub use obstacle::Obstacle;
+
+pub mod bgm;
+pub use bgm::BgmPlayer;
+pub mod bgm_mode;
+pub use bgm_mode::BgmMode;
+
+pub mod bgm_signal;
+pub use bgm_signal::BgmSignal;

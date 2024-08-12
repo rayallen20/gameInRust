@@ -1,6 +1,6 @@
 use bracket_lib::color::NAVY;
 use bracket_lib::prelude::{BTerm, GameState, VirtualKeyCode};
-use crate::game::{GameMode, Obstacle, Player};
+use crate::game::{BgmPlayer, GameMode, Obstacle, Player};
 
 pub const SCREEN_HEIGHT: i32 = 50;
 pub const SCREEN_WIDTH: i32 = 80;
@@ -12,6 +12,7 @@ pub struct State {
     obstacle: Obstacle,
     frame_time: f32,
     score: i32,
+    bgm_player: BgmPlayer,
 }
 
 impl State {
@@ -25,6 +26,7 @@ impl State {
             obstacle: Obstacle::new(SCREEN_WIDTH, player_world_x, 0),
             frame_time: 0.0,
             score: 0,
+            bgm_player: BgmPlayer::new(),
         }
     }
 
@@ -41,6 +43,10 @@ impl State {
                 _ => {},
             }
         }
+
+        // 播放BGM
+        let bgm_path = "./music/mario_3.mp3";
+        self.bgm_player.play(bgm_path.to_string());
     }
 
     pub fn play(&mut self, ctx: &mut BTerm) {
@@ -78,6 +84,10 @@ impl State {
         if self.player.screen_y > SCREEN_HEIGHT || self.obstacle.hit(&self.player) {
             self.game_mode = GameMode::Dead;
         }
+
+        // 播放BGM
+        let bgm_path = "./music/under_water.mp3";
+        self.bgm_player.play(bgm_path.to_string());
     }
 
     pub fn dead(&mut self, ctx: &mut BTerm) {
@@ -94,6 +104,10 @@ impl State {
                 _ => {},
             }
         }
+
+        // 播放BGM
+        let bgm_path = "./music/guitar_mario.mp3";
+        self.bgm_player.play(bgm_path.to_string());
     }
 
     pub fn restart(&mut self) {
