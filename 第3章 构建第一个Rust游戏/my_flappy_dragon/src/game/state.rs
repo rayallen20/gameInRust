@@ -64,7 +64,7 @@ impl State {
 
         ctx.print(0, 0, format!("Velocity: {}", self.player.velocity));
         ctx.print(0, 2, format!("Score: {}", self.score));
-        ctx.print(0, 2, format!("FPS: {}", ctx.fps));
+        ctx.print(0, 3, format!("FPS: {}", ctx.fps));
 
         self.player.render(ctx);
         self.obstacle.render(ctx, self.player.world_x);
