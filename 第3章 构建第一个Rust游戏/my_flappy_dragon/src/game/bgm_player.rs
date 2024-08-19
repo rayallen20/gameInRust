@@ -25,21 +25,15 @@ impl BgmPlayer {
         // 初态: 没有BGM在播放
         if !self.is_playing && self.current_bgm == String::new() {
             self.play(bgm_path.clone());
-            self.is_playing = true;
-            self.current_bgm = bgm_path.clone();
         }
 
         // 模态转换: 给定的BGM不是当前正在播放的BGM 则播放给定的BGM
         if self.is_playing && self.current_bgm != bgm_path.clone() {
             // step1. 停止当前播放的BGM
-            self.sink.stop();
-            self.is_playing = false;
-            self.current_bgm = String::new();
+            self.stop();
 
             // step2. 播放新的BGM
             self.play(bgm_path.clone());
-            self.is_playing = true;
-            self.current_bgm = bgm_path.clone();
         }
 
         if self.sink.empty() {
@@ -48,10 +42,18 @@ impl BgmPlayer {
         }
     }
 
-    fn play(&self, bgm_path: String) {
+    fn play(&mut self, bgm_path: String) {
         let file = File::open(bgm_path.as_str()).unwrap();
         let source = Decoder::new(BufReader::new(file)).unwrap();
         self.sink.append(source);
+        self.is_playing = true;
+        self.current_bgm = bgm_path.clone();
+    }
+
+    fn stop(&mut self)  {
+        self.sink.stop();
+        self.is_playing = false;
+        self.current_bgm = String::new();
     }
 }
 
