@@ -46,7 +46,7 @@ impl State {
 
         // 播放BGM
         let bgm_path = "./music/mario_3.mp3";
-        self.bgm_player.play(bgm_path.to_string());
+        self.bgm_player.play_bgm(bgm_path.to_string());
     }
 
     pub fn play(&mut self, ctx: &mut BTerm) {
@@ -87,7 +87,7 @@ impl State {
 
         // 播放BGM
         let bgm_path = "./music/under_water.mp3";
-        self.bgm_player.play(bgm_path.to_string());
+        self.bgm_player.play_bgm(bgm_path.to_string());
     }
 
     pub fn dead(&mut self, ctx: &mut BTerm) {
@@ -107,7 +107,7 @@ impl State {
 
         // 播放BGM
         let bgm_path = "./music/guitar_mario.mp3";
-        self.bgm_player.play(bgm_path.to_string());
+        self.bgm_player.play_bgm(bgm_path.to_string());
     }
 
     pub fn restart(&mut self) {
